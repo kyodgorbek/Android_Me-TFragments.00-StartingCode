@@ -2,6 +2,7 @@ package com.example.android.android_me.ui;
 
 import android.app.Fragment;
 import android.content.Context;
+import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -32,9 +33,14 @@ public class MasterListFragment extends Fragment {
         super.onAttach(context);
 
 
+        try {
+            mCallBack = (OnImageClickListener) context;
+        } catch (ClassCastException e) {
 
+            throw new ClassCastException(context.toString() + "must implemented 0r");
+
+        }
     }
-
     public MasterListFragment() {
     }
 
@@ -46,7 +52,7 @@ public class MasterListFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
 
-        final View rootView = inflater.inflate(R.layout.activity_list, container, false);
+        final View rootView = inflater.inflate(R.layout.fragment_master_list, container, false);
 
         GridView gridView = (GridView)rootView.findViewById(R.id.images_grid_view);
 
